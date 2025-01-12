@@ -27,13 +27,13 @@ return {
 		config = true,
 		opts = {},
 	},
-	{
-		-- Highlight todo, notes, etc in comments
-		"folke/todo-comments.nvim",
-		event = "VimEnter",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = { signs = false },
-	},
+	-- {
+	-- 	-- Highlight todo, notes, etc in comments
+	-- 	"folke/todo-comments.nvim",
+	-- 	event = "VimEnter",
+	-- 	dependencies = { "nvim-lua/plenary.nvim" },
+	-- 	opts = { signs = false },
+	-- },
 	-- {
 	-- 	-- High-performance color highlighter
 	-- 	"norcalli/nvim-colorizer.lua",
@@ -41,20 +41,38 @@ return {
 	-- 		require("colorizer").setup()
 	-- 	end,
 	-- },
+	-- {
+	-- 	"uga-rosa/ccc.nvim",
+	-- 	lazy = false,
+	-- 	opts = {
+	-- 		highlighter = {
+	-- 			auto_enable = true,
+	-- 			lsp = true,
+	-- 		},
+	-- 	},
+	-- 	keys = {
+	-- 		{ "<space>cc", "<cmd>CccPick<cr>", desc = "Escoger color" },
+	-- 		{ "<space>ct", "<cmd>CccHighlighterToggle<cr>", desc = "Alternar color" },
+	-- 		{ "<space>ce", "<cmd>CccConvert<cr>", desc = "Editar color" },
+	-- 	},
+	-- },
 	{
-		"uga-rosa/ccc.nvim",
-		lazy = false,
-		opts = {
-			highlighter = {
-				auto_enable = true,
-				lsp = true,
-			},
-		},
-		keys = {
-			{ "<space>cc", "<cmd>CccPick<cr>", desc = "Escoger color" },
-			{ "<space>ct", "<cmd>CccHighlighterToggle<cr>", desc = "Alternar color" },
-			{ "<space>ce", "<cmd>CccConvert<cr>", desc = "Editar color" },
-		},
+		"echasnovski/mini.hipatterns",
+		config = function()
+			local hipatterns = require("mini.hipatterns")
+			hipatterns.setup({
+				highlighters = {
+					-- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
+					fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+					hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+					todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+					note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+
+					-- Highlight hex color strings (`#rrggbb`) using that color
+					hex_color = hipatterns.gen_highlighter.hex_color(),
+				},
+			})
+		end,
 	},
 	{
 		"folke/noice.nvim",
@@ -143,37 +161,108 @@ return {
 			require("mini.animate").setup()
 		end,
 	},
+	-- {
+	-- 	"gen740/SmoothCursor.nvim",
+	-- 	init = function()
+	-- 		require("smoothcursor").setup({
+	-- 			type = "exp",
+	-- 			fancy = { enable = true },
+	-- 			cursor = "󰁕",
+	-- 		})
+	-- 		local autocmd = vim.api.nvim_create_autocmd
+	--
+	-- 		autocmd({ "ModeChanged" }, {
+	-- 			callback = function()
+	-- 				local current_mode = vim.fn.mode()
+	-- 				if current_mode == "n" then
+	-- 					vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#8aa872" })
+	-- 					vim.fn.sign_define("smoothcursor", { text = "󰁕" })
+	-- 				elseif current_mode == "v" then
+	-- 					vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#bf616a" })
+	-- 					vim.fn.sign_define("smoothcursor", { text = "" })
+	-- 				elseif current_mode == "V" then
+	-- 					vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#bf616a" })
+	-- 					vim.fn.sign_define("smoothcursor", { text = "" })
+	-- 				elseif current_mode == "�" then
+	-- 					vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#bf616a" })
+	-- 					vim.fn.sign_define("smoothcursor", { text = "" })
+	-- 				elseif current_mode == "i" then
+	-- 					vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#668aab" })
+	-- 					vim.fn.sign_define("smoothcursor", { text = "" })
+	-- 				end
+	-- 			end,
+	-- 		})
+	-- 	end,
+	-- },
 	{
-		"gen740/SmoothCursor.nvim",
-		init = function()
-			require("smoothcursor").setup({
-				type = "exp",
-				fancy = { enable = true },
-				cursor = "󰁕",
-			})
-			local autocmd = vim.api.nvim_create_autocmd
+		"sphamba/smear-cursor.nvim",
 
-			autocmd({ "ModeChanged" }, {
-				callback = function()
-					local current_mode = vim.fn.mode()
-					if current_mode == "n" then
-						vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#8aa872" })
-						vim.fn.sign_define("smoothcursor", { text = "󰁕" })
-					elseif current_mode == "v" then
-						vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#bf616a" })
-						vim.fn.sign_define("smoothcursor", { text = "" })
-					elseif current_mode == "V" then
-						vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#bf616a" })
-						vim.fn.sign_define("smoothcursor", { text = "" })
-					elseif current_mode == "�" then
-						vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#bf616a" })
-						vim.fn.sign_define("smoothcursor", { text = "" })
-					elseif current_mode == "i" then
-						vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#668aab" })
-						vim.fn.sign_define("smoothcursor", { text = "" })
-					end
-				end,
+		opts = {
+			-- Smear cursor color. Defaults to Cursor GUI color if not set.
+			-- Set to "none" to match the text color at the target cursor position.
+			cursor_color = "#d3cdc3",
+
+			-- Background color. Defaults to Normal GUI background color if not set.
+			normal_bg = "#282828",
+
+			-- Smear cursor when switching buffers or windows.
+			smear_between_buffers = true,
+
+			-- Smear cursor when moving within line or to neighbor lines.
+			smear_between_neighbor_lines = true,
+
+			-- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
+			-- Smears will blend better on all backgrounds.
+			legacy_computing_symbols_support = false,
+		},
+	},
+	{
+		"karb94/neoscroll.nvim",
+		opts = {},
+	},
+	{
+		"bitfield/vim-gitgo",
+		lazy = false,
+	},
+	{
+		"SmiteshP/nvim-navbuddy",
+		lazy = false,
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"MunifTanjim/nui.nvim",
+		},
+		-- commands={Navbuddy}
+		-- opts = { lsp = { auto_attach = true } },
+		config = function()
+			local navbuddy = require("nvim-navbuddy")
+			navbuddy.setup({
+				lsp = { auto_attach = true },
 			})
+			vim.keymap.set("n", "gl", "<cmd>Navbuddy<CR>", {})
+		end,
+	},
+	{
+		"Bekaboo/dropbar.nvim",
+		-- optional, but required for fuzzy finder support
+		dependencies = {
+			"nvim-telescope/telescope-fzf-native.nvim",
+			build = "make",
+		},
+		config = function()
+			local dropbar_api = require("dropbar.api")
+			vim.keymap.set("n", "<Leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
+			vim.keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })
+			vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
+		end,
+	},
+	{
+		"leath-dub/snipe.nvim",
+		config = function()
+			local snipe = require("snipe")
+			snipe.setup({
+				position = "center",
+			})
+			vim.keymap.set("n", "gb", snipe.open_buffer_menu, { desc = "Abre snipe" })
 		end,
 	},
 }

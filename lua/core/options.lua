@@ -7,9 +7,9 @@ vim.o.mouse = "a" -- Enable mouse mode (default: '')
 vim.o.autoindent = true -- Copy indent from current line when starting new one (default: true)
 vim.o.ignorecase = true -- Case-insensitive searching UNLESS \C or capital in search (default: false)
 vim.o.smartcase = true -- Smart case (default: false)
-vim.o.shiftwidth = 4 -- The number of spaces inserted for each indentation (default: 8)
-vim.o.tabstop = 4 -- Insert n spaces for a tab (default: 8)
-vim.o.softtabstop = 4 -- Number of spaces that a tab counts for while performing editing operations (default: 0)
+vim.o.shiftwidth = 2 -- The number of spaces inserted for each indentation (default: 8)
+vim.o.tabstop = 2 -- Insert n spaces for a tab (default: 8)
+vim.o.softtabstop = 2 -- Number of spaces that a tab counts for while performing editing operations (default: 0)
 vim.o.expandtab = true -- Convert tabs to spaces (default: false)
 vim.o.scrolloff = 4 -- Minimal number of screen lines to keep above and below the cursor (default: 0)
 vim.o.sidescrolloff = 8 -- Minimal number of screen columns either side of cursor if wrap is `false` (default: 0)
@@ -37,15 +37,16 @@ vim.o.backup = false -- Creates a backup file (default: false)
 vim.o.writebackup = false -- If a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited (default: true)
 vim.o.undofile = true -- Save undo history (default: false)
 vim.o.completeopt = "menuone,noselect" -- Set completeopt to have a better completion experience (default: 'menu,preview')
-vim.opt.shortmess:append("c") -- Don't give |ins-completion-menu| messages (default: does not include 'c')
-vim.opt.iskeyword:append("-") -- Hyphenated words recognized by searches (default: does not include '-')
-vim.opt.formatoptions:remove({ "c", "r", "o" }) -- Don't insert the current comment leader automatically for auto-wrapping comments using 'textwidth', hitting <Enter> in insert mode, or hitting 'o' or 'O' in normal mode. (default: 'croql')
-vim.opt.runtimepath:remove("/usr/share/vim/vimfiles") -- Separate Vim plugins from Neovim in case Vim still in use (default: includes this path if Vim is installed)
-vim.opt.foldmethod = "indent"
-vim.opt.colorcolumn = "80"
-vim.opt.foldlevel = 100
-vim.opt.undofile = true
-vim.opt.showmode = false
+--vim.o.shortmess:iappend("c") -- Don't give |ins-completion-menu| messages (default: does not include 'c')
+--vim.o.iskeyword:append("-") -- Hyphenated words recognized by searches (default: does not include '-')
+--vim.o.formatoptions:remove({ "c", "r", "o" }) -- Don't insert the current comment leader automatically for auto-wrapping comments using 'textwidth', hitting <Enter> in insert mode, or hitting 'o' or 'O' in normal mode. (default: 'croql')
+--vim.o.runtimepath:remove("/usr/share/vim/vimfiles") -- Separate Vim plugins from Neovim in case Vim still in use (default: includes this path if Vim is installed)
+vim.o.foldmethod = "indent"
+vim.o.colorcolumn = "80"
+vim.o.foldlevel = 100
+vim.o.undofile = true
+vim.o.showmode = false
 ---@diagnostic disable-next-line: assign-type-mismatch
-vim.opt.undodir = vim.fn.expand("~/.undodir/")
+vim.o.undodir = vim.fn.expand("~/.undodir/")
 vim.g.skip_ts_context_commentstring_module = true
+--vim.opts.rocks.hererocks = true

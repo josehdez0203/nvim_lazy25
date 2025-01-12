@@ -56,7 +56,22 @@ return {
 				--   extra_filetypes = { "svelte" },
 				-- }), -- js/ts formatter
 				formatting.prettierd.with({
-					filetypes = { "html", "json", "yaml", "markdown", "toml", "css", "scss", "js", "ts", "jsx", "tsx" },
+					filetypes = {
+						"html",
+						"json",
+						"yaml",
+						"markdown",
+						"toml",
+						"css",
+						"scss",
+						"js",
+						"ts",
+						"jsx",
+						"tsx",
+						"tmpl",
+						"template",
+						"gohtml",
+					},
 					-- condition = function(utils)
 					--   return utils.root_has_file({ ".prettierrc.js", ".prettierrc" })
 					-- end,
