@@ -1,3 +1,28 @@
-# Neovim Kickstart 2024
+# Neovim 2025 config con Lazy y configurada por mi
 
-This repository contains my custom Neovim configuration for 2024 based on [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim). It includes features like LSP, syntax highlighting, Git integration, and more.
+## Detalle
+
+- lsp con lspconfig.nvim
+- autoformato con none-ls
+- Harpoon
+- nvim-tree
+- oil.nvim
+- blink (autocompletado)
+- colorscheme {cattpuccin, gruvbox, gruvbox-material, nord, tokionight, sonokai}
+- bufferline
+- alpha
+- comment
+- dressing
+- flutter
+- gitsigns
+- blankline
+- lualine
+- noice
+- telescope
+- treesitter
+
+Otras configuraciones más en misc.lua
+
+[Mi repositorio](https://github.com/josehdez0203/nvim_lazy25)
+
+2025-06-15
