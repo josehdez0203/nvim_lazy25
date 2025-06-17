@@ -28,6 +28,7 @@ return {
 
 		mason_null_ls.setup({
 			ensure_installed = {
+				"prettier",
 				"prettierd", -- prettier formatter
 				"stylua", -- lua formatter
 				"black", -- python formatter
@@ -58,37 +59,49 @@ return {
 				formatting.prettierd.with({
 					filetypes = {
 						"html",
-						"json",
 						"yaml",
 						"markdown",
 						"toml",
 						"css",
 						"scss",
-						"js",
-						"ts",
-						"jsx",
-						"tsx",
-						"tmpl",
-						"template",
+						"javascript",
+						"typescript",
+						"javascriptreact",
+						"typescriptreact",
+						"templ",
+						-- "template",
 						"gohtml",
+						"json",
+						"jsonc",
 					},
 					-- condition = function(utils)
 					--   return utils.root_has_file({ ".prettierrc.js", ".prettierrc" })
 					-- end,
 				}),
-				formatting.prettier,
+				formatting.shfmt.with({
+					filetypes = {
+						"sh",
+					},
+				}),
+				-- formatting.prettier.with({
+				-- 	filetypes = { "json" },
+				-- }),
 				formatting.stylua, -- lua formatter
 				formatting.isort,
 				formatting.black,
 				formatting.dart_format,
-				formatting.gofumpt,
+				formatting.gofumpt.with({
+					filetypes = { "go" },
+				}),
 				-- formatting.phpcbf,
 				formatting.pretty_php,
 				-- formatting.prettier.with({
 				--   filetypes = { "php" },
 				--   extra_filetypes = { "php" },
 				-- }),
+				--
 				diagnostics.pylint,
+
 				-- diagnostics.eslint_d.with({ -- js/ts linter
 				--   filetypes = { "js", "ts", "tsx", "jsx" },
 				--   -- condition = function(utils)

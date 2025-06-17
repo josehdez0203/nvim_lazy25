@@ -17,15 +17,43 @@ return {
 	-- your lsp config or other stuff
 	{
 		"neovim/nvim-lspconfig",
-		-- require = {
-		-- 	"onsails/lspkind.nvim",
-		-- },
+		dependencies = {
+			"saghen/blink.cmp",
+			{
+				"folke/lazydev.nvim",
+				ft = "lua",
+				opts = {
+					library = {
+						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+					},
+				},
+			},
+		},
 		config = function()
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local capabilities = require("blink.cmp").get_lsp_capabilities({
+				textDocument = {
+					foldingRange = {
+						dynamicRegistration = false,
+						lineFoldingOnly = true,
+					},
+				},
+			})
 			local lspconfig = require("lspconfig")
+
 			local util = require("lspconfig/util")
 			-- local navic = require("nvim-navic")
 			-- navic.setup({ lsp = { auto_attach = true } })
+			local opts = { noremap = true, silent = true }
+			vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+			vim.keymap.set({ "n", "v" }, "<c-a>", vim.lsp.buf.code_action, opts)
+			vim.keymap.set("n", "fr", vim.lsp.buf.rename, opts)
+			vim.keymap.set("n", "<leader>i", "<cmd>LspInfo<CR>", opts)
+			vim.keymap.set("n", "<leader>d", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
+			vim.keymap.set("n", "<leader>,", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts)
+			vim.keymap.set("n", "<leader>.", "<cmd>lua vim.diagnostic.goto_next()<cr>", opts)
+			vim.keymap.set("n", "<leader>df", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
+			vim.keymap.set("n", "<leader>dd", "<cmd>Telescope diagnostics<CR>", opts)
 			vim.keymap.set("n", "k", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 			-- vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references()<CR>", {})
@@ -34,14 +62,30 @@ return {
 				tel.lsp_references()
 			end)
 
-			-- vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
-			vim.keymap.set({ "n", "v" }, "<c-a>", vim.lsp.buf.code_action, {})
-			vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, {})
-			vim.keymap.set("n", "<leader>i", "<cmd>LspInfo<CR>", {})
-			vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float, {})
-			vim.keymap.set("n", "<leader><", vim.diagnostic.goto_prev, {})
-			vim.keymap.set("n", "<leader>>", vim.diagnostic.goto_next, {})
-			vim.keymap.set("n", "D", "<cmd>Telescope diagnostics bufnr=0<CR>", {})
+			vim.diagnostic.config({
+				-- signs = true,
+				virtual_text = true,
+				underline = true,
+				update_in_insert = false,
+				severity_sort = true,
+				float = {
+					border = "rounded",
+					source = true,
+				},
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = "󰅚 ",
+						[vim.diagnostic.severity.WARN] = "󰀪 ",
+						[vim.diagnostic.severity.INFO] = "󰋽 ",
+						[vim.diagnostic.severity.HINT] = "󰌶 ",
+					},
+					numhl = {
+						[vim.diagnostic.severity.ERROR] = "ErrorMsg",
+						[vim.diagnostic.severity.WARN] = "WarningMsg",
+					},
+				},
+			})
+
 			-- local on_attach = function(client, bufnr)
 			-- 	if client.server_capabilities.documentSymbolProvider then
 			-- 		navic.attach(client, bufnr)
@@ -60,8 +104,22 @@ return {
 			})
 			-- configure html server
 			lspconfig["html"].setup({
+				settings = {
+					html = {
+						format = {
+							templating = true,
+							wrapLineLength = 120,
+							wrapAttributes = "auto",
+						},
+						hover = {
+							documentation = true,
+							references = true,
+						},
+					},
+				},
 				capabilities = capabilities,
 				configurationSection = { "html", "css", "javascript" },
+				filetypes = { "html" },
 				embeddedLanguages = {
 					css = true,
 					javascript = true,
@@ -71,6 +129,17 @@ return {
 			-- configure typescript server with plugin
 			lspconfig["ts_ls"].setup({
 				capabilities = capabilities,
+				cmd = { "typescript-language-server", "--stdio" },
+				filetypes = {
+					"javascript",
+					"javascriptreact",
+					"javascript.jsx",
+					"typescript",
+					"typescriptreact",
+					"typescript.tsx",
+				},
+				root_dir = util.root_pattern("tsconfig.json", "jsconfig.json", "package.json", ".git"),
+				single_file_support = true,
 			})
 			-- configure css server
 			lspconfig["cssls"].setup({
@@ -94,6 +163,8 @@ return {
 				capabilities = capabilities,
 				filetypes = {
 					"html",
+					"typescript",
+					"javascript",
 					"typescriptreact",
 					"javascriptreact",
 					"css",
@@ -102,12 +173,13 @@ return {
 					"less",
 					"svelte",
 					"gohtml",
+					"templ",
 				},
 			})
 			--Phpactor
-			lspconfig["phpactor"].setup({
-				capabilities = capabilities,
-			})
+			-- lspconfig["phpactor"].setup({
+			-- 	capabilities = capabilities,
+			-- })
 		end,
 	},
 	-- {

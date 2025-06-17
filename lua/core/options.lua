@@ -1,6 +1,7 @@
 vim.wo.number = true -- Make line numbers default (default: false)
 vim.o.relativenumber = true -- Set relative numbered lines (default: false)
-vim.o.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim. (default: '')
+vim.o.clipboard = unnamedplus -- Sync clipboard between OS and Neovim. (default: '')
+-- vim.cmd([[set clipboard+=unnamedplus]])
 vim.o.wrap = false -- Display lines as one long line (default: true)
 vim.o.linebreak = true -- Companion to wrap, don't split words (default: false)
 vim.o.mouse = "a" -- Enable mouse mode (default: '')
@@ -32,7 +33,7 @@ vim.o.fileencoding = "utf-8" -- The encoding written to a file (default: 'utf-8'
 vim.o.cmdheight = 1 -- More space in the Neovim command line for displaying messages (default: 1)
 vim.o.breakindent = true -- Enable break indent (default: false)
 vim.o.updatetime = 250 -- Decrease update time (default: 4000)
-vim.o.timeoutlen = 300 -- Time to wait for a mapped sequence to complete (in milliseconds) (default: 1000)
+-- vim.o.timeoutlen = 300 -- Time to wait for a mapped sequence to complete (in milliseconds) (default: 1000)
 vim.o.backup = false -- Creates a backup file (default: false)
 vim.o.writebackup = false -- If a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited (default: true)
 vim.o.undofile = true -- Save undo history (default: false)
@@ -46,7 +47,7 @@ vim.o.colorcolumn = "80"
 vim.o.foldlevel = 100
 vim.o.undofile = true
 vim.o.showmode = false
----@diagnostic disable-next-line: assign-type-mismatch
+--@diagnostic disable-next-line: assign-type-mismatch
 vim.o.undodir = vim.fn.expand("~/.undodir/")
 vim.g.skip_ts_context_commentstring_module = true
 --vim.opts.rocks.hererocks = true

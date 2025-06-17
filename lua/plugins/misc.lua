@@ -27,35 +27,16 @@ return {
 		config = true,
 		opts = {},
 	},
-	-- {
-	-- 	-- Highlight todo, notes, etc in comments
-	-- 	"folke/todo-comments.nvim",
-	-- 	event = "VimEnter",
-	-- 	dependencies = { "nvim-lua/plenary.nvim" },
-	-- 	opts = { signs = false },
-	-- },
-	-- {
-	-- 	-- High-performance color highlighter
-	-- 	"norcalli/nvim-colorizer.lua",
-	-- 	config = function()
-	-- 		require("colorizer").setup()
-	-- 	end,
-	-- },
-	-- {
-	-- 	"uga-rosa/ccc.nvim",
-	-- 	lazy = false,
-	-- 	opts = {
-	-- 		highlighter = {
-	-- 			auto_enable = true,
-	-- 			lsp = true,
-	-- 		},
-	-- 	},
-	-- 	keys = {
-	-- 		{ "<space>cc", "<cmd>CccPick<cr>", desc = "Escoger color" },
-	-- 		{ "<space>ct", "<cmd>CccHighlighterToggle<cr>", desc = "Alternar color" },
-	-- 		{ "<space>ce", "<cmd>CccConvert<cr>", desc = "Editar color" },
-	-- 	},
-	-- },
+	{
+		-- Highlight todo, notes, etc in comments
+		"folke/todo-comments.nvim",
+		event = "VimEnter",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = { signs = false },
+		keys = {
+			{ "gt", "<cmd>TodoTelescope<cr>", desc = "Ver Todos" },
+		},
+	},
 	{
 		"echasnovski/mini.hipatterns",
 		config = function()
@@ -72,6 +53,14 @@ return {
 					hex_color = hipatterns.gen_highlighter.hex_color(),
 				},
 			})
+		end,
+	},
+	{
+		"echasnovski/mini.surround",
+		version = false,
+		lazy = false,
+		config = function()
+			require("mini.surround").setup()
 		end,
 	},
 	{
@@ -162,63 +151,97 @@ return {
 		end,
 	},
 	-- {
-	-- 	"gen740/SmoothCursor.nvim",
-	-- 	init = function()
-	-- 		require("smoothcursor").setup({
-	-- 			type = "exp",
-	-- 			fancy = { enable = true },
-	-- 			cursor = "󰁕",
-	-- 		})
-	-- 		local autocmd = vim.api.nvim_create_autocmd
+	-- 	"sphamba/smear-cursor.nvim",
 	--
-	-- 		autocmd({ "ModeChanged" }, {
-	-- 			callback = function()
-	-- 				local current_mode = vim.fn.mode()
-	-- 				if current_mode == "n" then
-	-- 					vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#8aa872" })
-	-- 					vim.fn.sign_define("smoothcursor", { text = "󰁕" })
-	-- 				elseif current_mode == "v" then
-	-- 					vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#bf616a" })
-	-- 					vim.fn.sign_define("smoothcursor", { text = "" })
-	-- 				elseif current_mode == "V" then
-	-- 					vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#bf616a" })
-	-- 					vim.fn.sign_define("smoothcursor", { text = "" })
-	-- 				elseif current_mode == "�" then
-	-- 					vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#bf616a" })
-	-- 					vim.fn.sign_define("smoothcursor", { text = "" })
-	-- 				elseif current_mode == "i" then
-	-- 					vim.api.nvim_set_hl(0, "SmoothCursor", { fg = "#668aab" })
-	-- 					vim.fn.sign_define("smoothcursor", { text = "" })
-	-- 				end
-	-- 			end,
-	-- 		})
-	-- 	end,
+	-- 	opts = {
+	-- 		-- Smear cursor color. Defaults to Cursor GUI color if not set.
+	-- 		-- Set to "none" to match the text color at the target cursor position.
+	-- 		cursor_color = "#d3cdc3",
+	--
+	-- 		-- Background color. Defaults to Normal GUI background color if not set.
+	-- 		normal_bg = "#282828",
+	--
+	-- 		-- Smear cursor when switching buffers or windows.
+	-- 		smear_between_buffers = true,
+	--
+	-- 		-- Smear cursor when moving within line or to neighbor lines.
+	-- 		smear_between_neighbor_lines = true,
+	--
+	-- 		-- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
+	-- 		-- Smears will blend better on all backgrounds.
+	-- 		legacy_computing_symbols_support = false,
+	-- 	},
 	-- },
 	{
-		"sphamba/smear-cursor.nvim",
-
-		opts = {
-			-- Smear cursor color. Defaults to Cursor GUI color if not set.
-			-- Set to "none" to match the text color at the target cursor position.
-			cursor_color = "#d3cdc3",
-
-			-- Background color. Defaults to Normal GUI background color if not set.
-			normal_bg = "#282828",
-
-			-- Smear cursor when switching buffers or windows.
-			smear_between_buffers = true,
-
-			-- Smear cursor when moving within line or to neighbor lines.
-			smear_between_neighbor_lines = true,
-
-			-- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
-			-- Smears will blend better on all backgrounds.
-			legacy_computing_symbols_support = false,
-		},
+		"karb94/neoscroll.nvim",
+		config = function()
+			require("neoscroll").setup({
+				mappings = { -- Keys to be mapped to their corresponding default scrolling animation
+					"<C-u>",
+					"<C-d>",
+					"<C-b>",
+					"<C-f>",
+					"<C-y>",
+					"<C-e>",
+					"zt",
+					"zz",
+					"zb",
+				},
+				hide_cursor = true, -- Hide cursor while scrolling
+				stop_eof = true, -- Stop at <EOF> when scrolling downwards
+				respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+				cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+				duration_multiplier = 1.0, -- Global duration multiplier
+				easing = "linear", -- Default easing function
+				pre_hook = nil, -- Function to run before the scrolling animation starts
+				post_hook = nil, -- Function to run after the scrolling animation ends
+				performance_mode = false, -- Disable "Performance Mode" on all buffers.
+				ignored_events = { -- Events ignored while scrolling
+					"WinScrolled",
+					"CursorMoved",
+				},
+			})
+		end,
 	},
 	{
 		"karb94/neoscroll.nvim",
 		opts = {},
+		config = function()
+			neoscroll = require("neoscroll")
+			local keymap = {
+				["<C-u>"] = function()
+					neoscroll.ctrl_u({ duration = 250 })
+				end,
+				["<C-d>"] = function()
+					neoscroll.ctrl_d({ duration = 250 })
+				end,
+				["<C-b>"] = function()
+					neoscroll.ctrl_b({ duration = 450 })
+				end,
+				["<C-f>"] = function()
+					neoscroll.ctrl_f({ duration = 450 })
+				end,
+				["<C-y>"] = function()
+					neoscroll.scroll(-0.1, { move_cursor = false, duration = 100 })
+				end,
+				["<C-e>"] = function()
+					neoscroll.scroll(0.1, { move_cursor = false, duration = 100 })
+				end,
+				["zt"] = function()
+					neoscroll.zt({ half_win_duration = 250 })
+				end,
+				["zz"] = function()
+					neoscroll.zz({ half_win_duration = 250 })
+				end,
+				["zb"] = function()
+					neoscroll.zb({ half_win_duration = 250 })
+				end,
+			}
+			local modes = { "n", "v", "x" }
+			for key, func in pairs(keymap) do
+				vim.keymap.set(modes, key, func)
+			end
+		end,
 	},
 	{
 		"bitfield/vim-gitgo",
@@ -263,6 +286,147 @@ return {
 				position = "center",
 			})
 			vim.keymap.set("n", "gb", snipe.open_buffer_menu, { desc = "Abre snipe" })
+		end,
+	},
+	{
+		"HiPhish/rainbow-delimiters.nvim",
+		config = function()
+			-- This module contains a number of default definitions
+			local rainbow_delimiters = require("rainbow-delimiters")
+
+			vim.g.rainbow_delimiters = {
+				strategy = {
+					[""] = rainbow_delimiters.strategy["global"],
+					vim = rainbow_delimiters.strategy["local"],
+				},
+				query = {
+					[""] = "rainbow-delimiters",
+					lua = "rainbow-blocks",
+				},
+				priority = {
+					[""] = 110,
+					lua = 210,
+				},
+				highlight = {
+					"RainbowDelimiterRed",
+					"RainbowDelimiterYellow",
+					"RainbowDelimiterBlue",
+					-- "RainbowDelimiterOrange",
+					"RainbowDelimiterGreen",
+					"RainbowDelimiterViolet",
+					"RainbowDelimiterCyan",
+				},
+			}
+		end,
+	},
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+		---@module 'render-markdown'
+		---@type render.md.UserConfig
+		opts = {
+			render_modes = { "n", "c", "t" },
+		},
+	},
+	-- {
+	-- 	"yetone/avante.nvim",
+	-- 	event = "VeryLazy",
+	-- 	version = false, -- Never set this value to "*"! Never!
+	-- 	opts = {
+	-- 		-- add any opts here
+	-- 		-- for example
+	-- 		provider = "openai",
+	-- 		providers = {
+	-- 			openai = {
+	-- 				endpoint = "https://api.openai.com/v1",
+	-- 				model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+	-- 				extra_request_body = {
+	-- 					timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+	-- 					temperature = 0.75,
+	-- 					max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+	-- 					--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+	-- 				},
+	-- 			},
+	-- 		},
+	-- 	},
+	-- 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+	-- 	build = "make",
+	-- 	-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+	-- 	dependencies = {
+	-- 		"nvim-treesitter/nvim-treesitter",
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		--- The below dependencies are optional,
+	-- 		"echasnovski/mini.pick", -- for file_selector provider mini.pick
+	-- 		"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+	-- 		"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+	-- 		"ibhagwan/fzf-lua", -- for file_selector provider fzf
+	-- 		"stevearc/dressing.nvim", -- for input provider dressing
+	-- 		"folke/snacks.nvim", -- for input provider snacks
+	-- 		"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+	-- 		"zbirenbaum/copilot.lua", -- for providers='copilot'
+	-- 		{
+	-- 			-- support for image pasting
+	-- 			"HakonHarnes/img-clip.nvim",
+	-- 			event = "VeryLazy",
+	-- 			opts = {
+	-- 				-- recommended settings
+	-- 				default = {
+	-- 					embed_image_as_base64 = false,
+	-- 					prompt_for_file_name = false,
+	-- 					drag_and_drop = {
+	-- 						insert_mode = true,
+	-- 					},
+	-- 					-- required for Windows users
+	-- 					use_absolute_path = true,
+	-- 				},
+	-- 			},
+	-- 		},
+	-- 		{
+	-- 			-- Make sure to set this up properly if you have lazy=true
+	-- 			"MeanderingProgrammer/render-markdown.nvim",
+	-- 			opts = {
+	-- 				file_types = { "markdown", "Avante" },
+	-- 			},
+	-- 			ft = { "markdown", "Avante" },
+	-- 		},
+	-- 	},
+	-- },
+	-- {
+	-- 	"tpope/vim-surround",
+	-- 	dependencies = { "tpope/vim-repeat" },
+	-- },
+	{
+		"nvim-telescope/telescope-project.nvim",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+		},
+		config = function()
+			vim.api.nvim_set_keymap(
+				"n",
+				"<C-p>",
+				":lua require'telescope'.extensions.project.project{}<CR>",
+				{ noremap = true, silent = true }
+			)
+		end,
+	},
+	{
+		"serenevoid/kiwi.nvim",
+		config = function()
+			local kiwi = require("kiwi")
+
+			-- Necessary keybindings
+			vim.keymap.set("n", "<leader>ww", kiwi.open_wiki_index, {})
+			vim.keymap.set("n", "T", kiwi.todo.toggle, {})
+		end,
+		lazy = false,
+	},
+	{
+		"vimpostor/vim-tpipeline",
+		config = function()
+			vim.g.tpipeline_autoembeb = 1
+			vim.g.tpipeline_restore = 1
+			vim.g.tpipeline_clearstl = 1
 		end,
 	},
 }

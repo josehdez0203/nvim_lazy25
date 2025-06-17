@@ -28,7 +28,7 @@ return {
 			},
 		}) -- use defaults
 		require("telescope").load_extension("flutter")
-		vim.keymap.set("n", "<C-f>", "<CMD>Telescope flutter commands<CR>", {})
+		vim.keymap.set("n", "<C-t>", "<CMD>Telescope flutter commands<CR>", {})
 		vim.keymap.set("n", "<space>f", "<C-W>K", {})
 		vim.keymap.set("n", "<space>s", ":54vsplit<CR>", {})
 	end,

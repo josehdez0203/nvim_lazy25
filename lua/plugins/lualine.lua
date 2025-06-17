@@ -52,18 +52,22 @@ return {
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
-				theme = "nord", -- Set theme based on environment variable
+				theme = "gruvbox-material", -- Set theme based on environment variable
 				-- Some useful glyphs:
 				-- https://www.nerdfonts.com/cheat-sheet
 				--        
 				section_separators = { left = "", right = "" },
 				component_separators = { left = "", right = "" },
-				disabled_filetypes = { "alpha", "neo-tree" },
+				disabled_filetypes = { "alpha", "neo-tree", "NvimTree" },
 				always_divide_middle = true,
 			},
 			sections = {
 				lualine_a = { mode },
-				lualine_b = { "branch" },
+				lualine_b = { "branch", {
+					function()
+						return require("pomodoro").getStatus()
+					end,
+				} },
 				lualine_c = { filename },
 				lualine_x = {
 					diagnostics,
