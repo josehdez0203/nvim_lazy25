@@ -5,21 +5,19 @@ return {
 	config = function()
 		-- print(dir_path)
 		require("pomodoro").setup({
-			running = 20, -- Duration of work sessions in minutes
-			shortPause = 5, -- Duration of short breaks in minutes
-			longPause = 15, -- Duration of long breaks in minutes
+			running = 5, -- Duration of work sessions in minutes
+			shortPause = 1, -- Duration of short breaks in minutes
+			longPause = 2, -- Duration of long breaks in minuter
+			timeOut = 1000 * 60,
+			total = 2,
 			icons = {
+				detenido = "󰙦",
 				running = "", -- Icon for work sessions
 				shortPause = "", -- Icon for short breaks
 				longPause = "", -- Icon for long breaks
 			},
 		})
-		vim.api.nvim_set_keymap(
-			"n",
-			"<S-T>",
-			":lua require'pomodoro'.showInfo()<CR>",
-			{ noremap = true, silent = true }
-		)
-		vim.api.nvim_set_keymap("n", "<S-C>", ":PMCreate<CR>", { noremap = true, silent = true })
+		vim.api.nvim_set_keymap("n", "<S-R>", ":PMInfo<CR>", { noremap = true, silent = true })
+		vim.api.nvim_set_keymap("n", "<leader>t", ":PMPopup<CR>", { noremap = true, silent = true })
 	end,
 }
