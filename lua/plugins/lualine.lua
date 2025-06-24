@@ -44,7 +44,7 @@ return {
 
 		local diff = {
 			"diff",
-			colored = false,
+			colored = true,
 			symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
 			cond = hide_in_width,
 		}
@@ -63,15 +63,18 @@ return {
 			},
 			sections = {
 				lualine_a = { mode },
-				lualine_b = { "branch", {
-					function()
-						return require("pomodoro").getStatus()
-					end,
-				} },
+				lualine_b = {
+					"branch",
+					diff,
+					{
+						function()
+							return require("pomodoro").getStatus()
+						end,
+					},
+				},
 				lualine_c = { filename },
 				lualine_x = {
 					diagnostics,
-					diff,
 					{ "encoding", cond = hide_in_width },
 					{ "filetype", cond = hide_in_width },
 				},

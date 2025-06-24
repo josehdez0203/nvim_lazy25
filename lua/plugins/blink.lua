@@ -32,6 +32,8 @@ return {
 						"jsonc",
 						"c",
 						"cpp",
+						"dart",
+						"toml",
 					}, vim.bo.filetype)
 				end,
 
@@ -42,7 +44,7 @@ return {
 					nerd_font_variant = "normal",
 				},
 				sources = {
-					default = { "lsp", "path", "snippets", "buffer", "emoji" },
+					default = { "snippets", "lsp", "path", "buffer", "emoji" },
 					providers = {
 						emoji = {
 							module = "blink-emoji",
@@ -89,7 +91,8 @@ return {
 				},
 			})
 
-			require("luasnip.loaders.from_vscode").lazy_load()
+			-- require("luasnip.loaders.from_vscode").lazy_load()
+			require("luasnip.loaders.from_snipmate").lazy_load()
 		end,
 	},
 }

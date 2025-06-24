@@ -37,16 +37,15 @@ return {
 						dynamicRegistration = false,
 						lineFoldingOnly = true,
 					},
+					completion = { completionItem = { snippetSupport = true } },
 				},
 			})
 			local lspconfig = require("lspconfig")
 
 			local util = require("lspconfig/util")
-			-- local navic = require("nvim-navic")
-			-- navic.setup({ lsp = { auto_attach = true } })
 			local opts = { noremap = true, silent = true }
 			vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-			vim.keymap.set({ "n", "v" }, "<c-a>", vim.lsp.buf.code_action, opts)
+			vim.keymap.set({ "n", "v" }, "<c-c>", vim.lsp.buf.code_action, opts)
 			vim.keymap.set("n", "fr", vim.lsp.buf.rename, opts)
 			vim.keymap.set("n", "<leader>i", "<cmd>LspInfo<CR>", opts)
 			vim.keymap.set("n", "<leader>d", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)

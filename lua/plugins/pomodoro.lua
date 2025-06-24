@@ -5,11 +5,11 @@ return {
 	config = function()
 		-- print(dir_path)
 		require("pomodoro").setup({
-			running = 5, -- Duration of work sessions in minutes
-			shortPause = 1, -- Duration of short breaks in minutes
-			longPause = 2, -- Duration of long breaks in minuter
+			running = 20, -- Duration of work sessions in minutes
+			shortPause = 5, -- Duration of short breaks in minutes
+			longPause = 15, -- Duration of long breaks in minuter
 			timeOut = 1000 * 60,
-			total = 2,
+			total = 4,
 			icons = {
 				detenido = "󰙦",
 				running = "", -- Icon for work sessions
