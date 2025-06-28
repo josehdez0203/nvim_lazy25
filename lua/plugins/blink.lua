@@ -60,7 +60,7 @@ return {
 						},
 					},
 				},
-				keymap = { preset = "default", ["<CR>"] = { "accept", "fallback" } },
+				keymap = { preset = "default", ["<CR>"] = { "accept", "fallback" }, ["<c-k>"] = false },
 				cmdline = {
 					enabled = false,
 				},

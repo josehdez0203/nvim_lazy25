@@ -2,24 +2,30 @@
 
 ## Detalle
 
-- lsp con lspconfig.nvim
-- autoformato con none-ls
-- Harpoon
-- nvim-tree
-- oil.nvim
-- blink (autocompletado)
-- colorscheme {cattpuccin, gruvbox, gruvbox-material, nord, tokionight, sonokai}
-- bufferline
-- alpha
-- comment
-- dressing
-- flutter
-- gitsigns
-- blankline
-- lualine
-- noice
-- telescope
-- treesitter
+- **lsp**
+  - _lspconfig.nvim, flutter_
+- **autoformato**
+  - _none-ls_
+- **Manejo de archivos**
+  - _nvim-tree, oil.nvim_
+- **Busqueda de archivos**
+  - _telescope, snacks_
+- **colorscheme**
+  - _cattpuccin, gruvbox, gruvbox-material, nord, tokionight, sonokai, oneDark, kanawa_
+- **Autocompletado**
+  - _blink_
+- **Proyectos**
+  - _telescope.proyect_
+- **Marcas**
+  - _Harpoon_
+- **UI**
+  - _bufferline, alpha, lualine, dressing, noice, blankline_
+- **Comentarios**
+  - _comment_
+- **Versiones**
+  - _gitsigns, lazygit_
+- **Highlighting**
+  - _treesitter_
 
 Otras configuraciones más en misc.lua
 
