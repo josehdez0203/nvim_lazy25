@@ -51,7 +51,7 @@ return {
 
 			require("telescope").load_extension("fzf")
 
-			vim.keymap.set("n", "ff", require("telescope.builtin").find_files, {})
+			-- vim.keymap.set("n", "ff", require("telescope.builtin").find_files, {})
 			vim.keymap.set("n", "fo", require("telescope.builtin").oldfiles, {})
 			vim.keymap.set("n", "fg", require("telescope.builtin").live_grep, {})
 			vim.keymap.set("n", "ft", require("telescope.builtin").help_tags, {})

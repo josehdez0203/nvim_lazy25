@@ -181,7 +181,7 @@ return {
 					"<C-u>",
 					"<C-d>",
 					"<C-b>",
-					"<C-f>",
+					-- "<C-f>",
 					"<C-y>",
 					"<C-e>",
 					"zt",
@@ -411,16 +411,31 @@ return {
 			)
 		end,
 	},
+	-- {
+	-- 	"serenevoid/kiwi.nvim",
+	-- 	config = function()
+	-- 		local kiwi = require("kiwi")
+	--
+	-- 		-- Necessary keybindings
+	-- 		vim.keymap.set("n", "<leader>ww", kiwi.open_wiki_index, {})
+	-- 		vim.keymap.set("n", "T", kiwi.todo.toggle, {})
+	-- 	end,
+	-- 	lazy = false,
+	-- },
 	{
-		"serenevoid/kiwi.nvim",
-		config = function()
-			local kiwi = require("kiwi")
-
-			-- Necessary keybindings
-			vim.keymap.set("n", "<leader>ww", kiwi.open_wiki_index, {})
-			vim.keymap.set("n", "T", kiwi.todo.toggle, {})
-		end,
-		lazy = false,
+		"echaya/neowiki.nvim",
+		opts = {
+			wiki_dirs = {
+				-- neowiki.nvim supports both absolute and relative paths
+				{ name = "Work", path = "~/wiki/work" },
+				{ name = "Personal", path = "~/wiki/personal" },
+			},
+		},
+		keys = {
+			-- 	-- { "<leader>ww", "<cmd>lua require('neowiki').open_wiki()<cr>", desc = "Open Wiki" },
+			{ "<leader>ww", "<cmd>lua require('neowiki').open_wiki_floating()<cr>", desc = "Open Floating Wiki" },
+			-- 	{ "T", "<cmd>lua require('neowiki').open_wiki_new_tab()<cr>", desc = "Open Wiki in Tab" },
+		},
 	},
 	{
 		"vimpostor/vim-tpipeline",
@@ -440,5 +455,22 @@ return {
 			vim.keymap.set("n", "<F12>", ":FloatermToggle<CR>", { desc = "FloatermToggle", silent = true })
 			vim.keymap.set("t", "<F12>", "<C-\\><C-n>:FloatermToggle<CR>", { desc = "FloatermToggle", silent = true })
 		end,
+	},
+	{
+		"folke/snacks.nvim",
+		opts = {
+			image = {},
+			picker = {},
+		},
+		keys = {
+			{
+				"ff",
+				function()
+					Snacks.picker.files()
+				end,
+				desc = "File picker",
+				silent = true,
+			},
+		},
 	},
 }
