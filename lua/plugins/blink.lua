@@ -34,6 +34,7 @@ return {
 						"cpp",
 						"dart",
 						"toml",
+						"hyprlang",
 					}, vim.bo.filetype)
 				end,
 
@@ -44,15 +45,36 @@ return {
 					nerd_font_variant = "normal",
 				},
 				sources = {
-					default = { "snippets", "lsp", "path", "buffer", "emoji" },
+					default = {
+						"snippets",
+						"lsp",
+						"path",
+						"buffer",
+						"emoji",
+					},
 					providers = {
+						path = {
+							module = "blink.cmp.sources.path",
+							score_offset = 3,
+							fallbacks = { "buffer" },
+							opts = {
+								trailing_slash = true,
+								label_trailing_slash = true,
+								get_cwd = function(context)
+									return vim.fn.expand(("#%d:p:h"):format(context.bufnr))
+								end,
+								show_hidden_files_by_default = false,
+								-- Treat `/path` as starting from the current working directory (cwd) instead of the root of your filesystem
+								ignore_root_slash = false,
+							},
+						},
 						emoji = {
 							module = "blink-emoji",
 							name = "Emoji",
 							score_offset = 15, -- Tune by preference
 							opts = {
 								insert = true, -- Insert emoji (default) or complete its name
-								---@type string|table|fun():table
+								-- -@type string|table|fun():table
 								trigger = function()
 									return { ":" }
 								end,
@@ -62,7 +84,7 @@ return {
 				},
 				keymap = { preset = "default", ["<CR>"] = { "accept", "fallback" }, ["<c-k>"] = false },
 				cmdline = {
-					enabled = false,
+					enabled = true,
 				},
 				completion = {
 					accept = { auto_brackets = { enabled = true } },

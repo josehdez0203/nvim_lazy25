@@ -18,7 +18,7 @@ require("lazy").setup({
 	spec = { import = "plugins" },
 })
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Lazy" })
-vim.cmd([[set clipboard+=unnamedplus ]])
-vim.cmd([[colorscheme gruvbox-material ]])
+-- vim.cmd([[set clipboard+=unnamedplus ]])
+vim.cmd([[colorscheme terafox]])
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

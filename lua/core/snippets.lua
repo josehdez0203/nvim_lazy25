@@ -55,25 +55,25 @@ vim.cmd([[
 -- _G.shift_k_enabled = false
 vim.api.nvim_create_augroup("LspGroup", {})
 
-vim.api.nvim_create_autocmd("CursorHold", {
-	group = "LspGroup",
-	callback = function()
-		-- if not _G.shift_k_enabled then
-		vim.diagnostic.open_float(nil, {
-			scope = "cursor",
-			focusable = false,
-			close_events = {
-				"CursorMoved",
-				"CursorMovedI",
-				"BufHidden",
-				"InsertCharPre",
-				"WinLeave",
-			},
-		})
-	end,
-	-- end,
-	desc = "Show diagnostic error info on CursorHold",
-})
+-- vim.api.nvim_create_autocmd("CursorHold", {
+-- 	group = "LspGroup",
+-- 	callback = function()
+-- 		-- if not _G.shift_k_enabled then
+-- 		vim.diagnostic.open_float(nil, {
+-- 			scope = "cursor",
+-- 			focusable = false,
+-- 			close_events = {
+-- 				"CursorMoved",
+-- 				"CursorMovedI",
+-- 				"BufHidden",
+-- 				"InsertCharPre",
+-- 				"WinLeave",
+-- 			},
+-- 		})
+-- 	end,
+-- 	-- end,
+-- 	desc = "Show diagnostic error info on CursorHold",
+-- })
 local RemoveComments = function()
 	local ts = vim.treesitter
 	local bufnr = vim.api.nvim_get_current_buf()

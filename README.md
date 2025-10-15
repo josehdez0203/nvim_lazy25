@@ -32,3 +32,5 @@ Otras configuraciones más en misc.lua
 [Mi repositorio](https://github.com/josehdez0203/nvim_lazy25)
 
 2025-06-15
+
+[josehdez0203](https://jose.jhc-sistemas.com/assets/img/about.png)

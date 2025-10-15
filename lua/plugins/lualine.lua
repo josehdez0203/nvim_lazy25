@@ -35,8 +35,8 @@ return {
 			"diagnostics",
 			sources = { "nvim_diagnostic" },
 			sections = { "error", "warn" },
-			symbols = { error = " ", warn = " ", info = " ", hint = " " },
-			colored = false,
+			symbols = { error = "E ", warn = "W ", info = "I ", hint = "H " },
+			colored = true,
 			update_in_insert = false,
 			always_visible = false,
 			cond = hide_in_width,
@@ -72,9 +72,9 @@ return {
 						end,
 					},
 				},
-				lualine_c = { filename },
+				lualine_c = { filename, diagnostics },
 				lualine_x = {
-					diagnostics,
+
 					{ "encoding", cond = hide_in_width },
 					{ "filetype", cond = hide_in_width },
 				},

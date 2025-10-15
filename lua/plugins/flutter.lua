@@ -1,5 +1,5 @@
 return {
-	"akinsho/flutter-tools.nvim",
+	"nvim-flutter/flutter-tools.nvim",
 	lazy = false,
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -25,6 +25,13 @@ return {
 				enabled = true,
 				notify_errors = false, -- if there is an error whilst running then notify the user
 				open_cmd = "54vs", -- command to use to open the log buffer
+			},
+			lsp = {
+				color = {
+					enabled = true,
+					background = true,
+					virtual_text = false,
+				},
 			},
 		}) -- use defaults
 		require("telescope").load_extension("flutter")

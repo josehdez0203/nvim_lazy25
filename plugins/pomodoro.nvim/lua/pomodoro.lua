@@ -40,7 +40,7 @@ function M.setup(opts)
 	-- print(expandedPath)
 	-- print(vim.fn.isdirectory(expandedPath))
 	if vim.fn.isdirectory(expandedPath) == 1 then
-		--TODO hacer chequeo de sonidos
+		--TODO: hacer chequeo de sonidos
 		-- print(expandedPath .. "/" .. M.opts.sonidoNuevo)
 		if vim.fn.filereadable(expandedPath .. "/" .. M.opts.sonidoNuevo) == 1 then
 			-- print(vim.fn.filereadable(expandedPath .. "/" .. M.opts.sonidoNuevo))
