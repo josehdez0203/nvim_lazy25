@@ -91,91 +91,29 @@ return {
 			-- 		navic.attach(client, bufnr)
 			-- 	end
 			-- end
-			lspconfig.lua_ls.setup({
-				settings = {
-					Lua = {
-						diagnostics = {
-							globals = { "vim" },
-						},
-					},
-				},
-				capabilities = capabilities,
-				-- on_attach = on_attach,
-			})
+			-- lspconfig.lua_ls.setup({
+			vim.lsp.enable("lua_ls")
+			-- vim.lsp.config.lua_ls.setup()
 			-- configure html server
-			lspconfig["html"].setup({
-				settings = {
-					html = {
-						format = {
-							templating = true,
-							wrapLineLength = 120,
-							wrapAttributes = "auto",
-						},
-						hover = {
-							documentation = true,
-							references = true,
-						},
-					},
-				},
-				capabilities = capabilities,
-				configurationSection = { "html", "css", "javascript" },
-				filetypes = { "html" },
-				embeddedLanguages = {
-					css = true,
-					javascript = true,
-				},
-				provideFormatter = true,
-			})
+			vim.lsp.enable("html")
+
+			-- lspconfig["html"].setup()
 			-- configure typescript server with plugin
-			lspconfig["ts_ls"].setup({
-				capabilities = capabilities,
-				cmd = { "typescript-language-server", "--stdio" },
-				filetypes = {
-					"javascript",
-					"javascriptreact",
-					"javascript.jsx",
-					"typescript",
-					"typescriptreact",
-					"typescript.tsx",
-				},
-				root_dir = util.root_pattern("tsconfig.json", "jsconfig.json", "package.json", ".git"),
-				single_file_support = true,
-			})
+			vim.lsp.enable("ts_ls")
+
+			-- lspconfig["ts_ls"].setup()
 			-- configure css server
-			lspconfig["cssls"].setup({
-				capabilities = capabilities,
-			})
-			lspconfig["gopls"].setup({
-				capabilities = capabilities,
-				-- on_attach = on_attach,
-				cmd = { "gopls" },
-				filetypes = { "go", "gomod", "gowork", "gotmpl" },
-				root_dir = util.root_pattern("go.work", "go.mod", ".git"),
-				settings = {
-					gopls = {
-						completeUnimported = true,
-						usePlaceholders = true,
-					},
-				},
-			})
+			-- lspconfig["cssls"].setup({
+			-- 	capabilities = capabilities,
+			-- })
+			vim.lsp.enable("cssls")
+			vim.lsp.enable("gopls")
+
+			-- lspconfig["gopls"].setup()
 			-- configure emmet language server
-			lspconfig["emmet_ls"].setup({
-				capabilities = capabilities,
-				filetypes = {
-					"html",
-					"typescript",
-					"javascript",
-					"typescriptreact",
-					"javascriptreact",
-					"css",
-					"sass",
-					"scss",
-					"less",
-					"svelte",
-					"gohtml",
-					"templ",
-				},
-			})
+			vim.lsp.enable("emmet_ls")
+
+			-- lspconfig["emmet_ls"].setup()
 			--Phpactor
 			-- lspconfig["phpactor"].setup({
 			-- 	capabilities = capabilities,

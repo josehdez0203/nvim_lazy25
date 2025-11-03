@@ -165,4 +165,5 @@ return {
 			require("onedark").load()
 		end,
 	},
+	{ "xeind/nightingale.nvim", lazy = false, priority = 1000 },
 }

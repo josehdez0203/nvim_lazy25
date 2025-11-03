@@ -53,3 +53,4 @@ vim.o.showmode = false
 vim.o.undodir = vim.fn.expand("~/.undodir/")
 vim.g.skip_ts_context_commentstring_module = true
 --vim.opts.rocks.hererocks = true
+vim.o.winborder = "rounded"

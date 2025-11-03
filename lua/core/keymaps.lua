@@ -12,8 +12,8 @@ vim.keymap.set(
 	"n",
 	"<leader>r",
 	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-	{ desc = "Reemplazar palabra" },
 	opts
+	-- { opts, desc = "Reemplazar palabra" }
 )
 -- save file
 vim.keymap.set("n", "<C-s>", "<cmd> w <CR>", opts)
